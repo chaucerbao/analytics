@@ -1,7 +1,7 @@
 {
   "name": "analytics",
   "version": "0.1.0",
-  "description": "",
+  "description": "A stand-alone analytics service inside a Docker container",
   "keywords": [],
   "main": "./src/index.ts",
   "lint-staged": {
@@ -30,7 +30,10 @@
     "micro": "^9.0.0"
   },
   "scripts": {
-    "start": "concurrently --names 'T,M' --prefix-colors 'yellow,blue' 'tsc --watch' 'micro-dev ./.build/'",
+    "start": "concurrently --names 'T,M,C' --prefix-colors 'yellow,blue,magenta' 'tsc --sourceMap --watch' 'micro-dev ./.build/' 'docker-compose run --rm --service-ports couchdb'",
+    "build": "rm -rf ./.build/ && tsc && docker-compose build --force-rm --no-cache",
+    "serve": "docker-compose up application database",
+    "postinstall": "cp ./.env.example ./.env",
     "precommit": "lint-staged"
   }
 }
