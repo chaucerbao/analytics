@@ -10,6 +10,10 @@ services:
       - web
     links:
       - database
+    environment:
+      - "COUCHDB_HOST=${COUCHDB_HOST}"
+      - "COUCHDB_USER=${COUCHDB_USER}"
+      - "COUCHDB_PASSWORD=${COUCHDB_PASSWORD}"
     restart: always
 
   database:

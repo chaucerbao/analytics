@@ -5,6 +5,8 @@ COPY ./.build/ /srv/
 WORKDIR /srv/
 ENV NODE_ENV=production
 RUN npm install --no-save \
-  micro
+  micro \
+  nano \
+  dotenv
 
 CMD ["./node_modules/.bin/micro", "./index.js"]
